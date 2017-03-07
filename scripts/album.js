@@ -1,30 +1,45 @@
+var albumBonnieRaitt = {
+   title: 'Luck of the Draw',
+   artist: 'Bonnie Raitt',
+   label: 'Capitol',
+   year: '1991',
+   albumArtUrl: 'assets/images/album_covers/14.png',
+   songs: [
+        { title: 'Something to Talk About', length: '3:47' },
+        { title: 'Good Man, Good Woman', length: '3:33' },
+        { title: 'I Cant Make You Love Me', length: '5:32'},
+        { title: 'No Business', length: '4:24' },
+        { title: 'Papa Come Quick', length: '3:15'},
+    ]
+ }; 
+
 var albumPicasso = {
-    name: 'The Colors',
+    title: 'The Colors',
     artist: 'Pablo Picasso',
     label: 'Cubism',
     year: '1881',
     albumArtUrl: 'assets/images/album_covers/01.png',
     songs: [
-        { name: 'Blue', length: '4:26' },
-        { name: 'Green', length: '3:14' },
-        { name: 'Red', length: '5:01' },
-        { name: 'Pink', length: '3:21' },
-        { name: 'Magenta', length: '2:15' }
+        { title: 'Blue', length: '4:26' },
+        { title: 'Green', length: '3:14' },
+        { title: 'Red', length: '5:01' },
+        { title: 'Pink', length: '3:21' },
+        { title: 'Magenta', length: '2:15' }
     ]
 };
 
 var albumMarconi = {
-    name: 'The Telephone',
+    title: 'The Telephone',
     artist: 'Guglielmo Marconi',
     label: 'EM',
     year: '1909',
     albumArtUrl: 'assets/images/album_covers/20.png',
     songs: [
-        { name: 'Hello, Operator?', length: '1:01' },
-        { name: 'Ring, ring, ring', length: '5:01' },
-        { name: 'Fits in your pocket', length: '3:21' },
-        { name: 'Can you hear me now?', length: '3:14' },
-        { name: 'Wrong phone number', length: '2:15' }
+        { title: 'Hello, Operator?', length: '1:01' },
+        { title: 'Ring, ring, ring', length: '5:01' },
+        { title: 'Fits in your pocket', length: '3:21' },
+        { title: 'Can you hear me now?', length: '3:14' },
+        { title: 'Wrong phone number', length: '2:15' }
     ]
 };
 
@@ -40,14 +55,14 @@ var createSongRow = function(songNumber, songName, songLength) {
     return template;
 };
 
-var setCurrentAlbum = function(album) {
     var albumTitle = document.getElementsByClassName('album-view-title')[0];
     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
     var albumImage = document.getElementsByClassName('album-cover-art')[0];
     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
-    albumTitle.firstChild.nodeValue = album.name;
+var setCurrentAlbum = function(album) {
+    albumTitle.firstChild.nodeValue = album.title;
     albumArtist.firstChild.nodeValue = album.artist;
     albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
     albumImage.setAttribute('src', album.albumArtUrl);
@@ -55,12 +70,22 @@ var setCurrentAlbum = function(album) {
     albumSongList.innerHTML = '';
 
     for (i = 0; i < album.songs.length; i++) {
-        albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].name, album.songs[i].length);
+        albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].length);
     }
 };
 
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
+
+var albumArray = [albumBonnieRaitt, albumPicasso, albumMarconi];
+var index = 1;
+albumImage.addEventListener("click",function(event) {
+    setCurrentAlbum(albumArray[index]);
+    index ++;
+    if (index == albumArray.length) {
+        index = 0;
+    }
+});
 };
 
 
