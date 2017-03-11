@@ -29,23 +29,23 @@ var albumMarconi = {
 };
 
 var createSongRow = function(songNumber, songName, songLength) {
-    var template =
+    var template=
         '<tr class="album-view-song-item">'
-      + ' <td class="song-item-number" data-song-number= "' + songNumber + '">' + songNumber + '</td>'
-      + ' <td class="song-item-title">' + songName + '</td>'
-      + ' <td class="song-item-duration">' + songLength + '</td>'
-      + '</tr>'
-      ;
+      +' <td class="song-item-number" data-song-number= "' + songNumber + '">' + songNumber + '</td>'
+      +' <td class="song-item-title">' + songName + '</td>'
+      +' <td class="song-item-duration">' + songLength + '</td>'
+      +'</tr>'
+    ;
 
     return template;
 };
 
-var setCurrentAlbum = function(album) {
+var setCurrentAlbum = function (album) {
     var albumTitle = document.getElementsByClassName('album-view-title')[0];
     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
     var albumImage = document.getElementsByClassName('album-cover-art')[0];
-    var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+    var albumSongList=document.getElementsByClassName('album-view-song-list')[0];
 
     albumTitle.firstChild.nodeValue = album.title;
     albumArtist.firstChild.nodeValue = album.artist;
@@ -54,7 +54,7 @@ var setCurrentAlbum = function(album) {
 
     albumSongList.innerHTML = '';
 
-    for (i = 0; i < album.songs.length; i++) {
+    for(var i = 0; i < album.songs.length; i++) {
         albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].length);
     }
 };
@@ -125,7 +125,7 @@ window.onload = function() {
         }
     });
 
-    for (var i=0; i<songRows.length; i++) {
+    for (i=0; i<songRows.length; i++) {
         songRows[i].addEventListener('mouseleave', function(event){ 
             var songItem = getSongItem(event.target);
             var songItemNumber = songItem.getAttribute('data-song-number');
